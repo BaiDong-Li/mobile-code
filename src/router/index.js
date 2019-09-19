@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 
-Vue.use(VueRouter)
-// 配置路透表
-const router = new VueRouter({
+Vue.use(Router)
+
+// 配置路由表
+export default new Router({
   routers: []
 })
 
 // 导出路由实例 挂载到main上
-export default router
