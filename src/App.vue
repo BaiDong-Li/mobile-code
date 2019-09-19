@@ -7,8 +7,20 @@
 </template>
 
 <script>
+import req from '@/utils/request'
 export default {
+  methods: {
+    getList () {
+      req({
+        method: 'get',
+        url: '/app/'
+      }).then(res => console.log(res))
+    }
 
+  },
+  created () {
+    this.getList()
+  }
 }
 </script>
 
