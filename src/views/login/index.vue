@@ -17,25 +17,29 @@
 </template>
 
 <script>
-import axios from '../../utils/request'
+// 引入 user下的 login api模块
+import { login } from '@/api/user'
+
 export default {
   name: 'login',
   data () {
     return {
       formData: {
-        mobile: '',
-        code: ''
+        mobile: '15911111111',
+        code: '246810'
       }
     }
   },
   methods: {
     async getForm () {
-      let res = await axios({
-        url: '/app/v1_0/authorizations',
-        method: 'post',
-        data: this.formData
-      })
-      console.log(res)
+      try {
+        let res = await login(this.formData)
+        // 在这里操作令牌
+      } catch (err) {
+        if (err.response.status === 400) {
+          this.$toast.fail('验证失败')
+        }
+      }
     }
   }
 }
