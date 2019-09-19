@@ -7,16 +7,21 @@
 </template>
 
 <script>
-import req from '@/utils/request'
+import axios from './utils/request'
 export default {
-  methods: {
-    getList () {
-      req({
-        method: 'get',
-        url: '/app/'
-      }).then(res => console.log(res))
-    }
 
+  methods: {
+    async  getList () {
+      let res = await axios({
+        url: '/app/v1_1/articles',
+        params: {
+          channel_id: 0,
+          timestamp: Date.now(),
+          with_top: 1
+        }
+      })
+      console.log(res.data)
+    }
   },
   created () {
     this.getList()
