@@ -34,6 +34,8 @@
 <script>
 // 引入 user下的 login api模块
 import { login } from '@/api/user'
+// 引入 mutaiton映射
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'login',
@@ -44,19 +46,27 @@ export default {
         mobile: '15911111111',
         code: '246810'
       }
+
     }
   },
   methods: {
+    //   引入仓库的存储方法
+    ...mapMutations(['changetoken']),
+    //   这个函数用于 提交登录信息
     async getForm () {
+      // 通过flag判断全局验证是否通过
       let flag = await this.$refs.loginForm.validate()
-      console.log(flag)
-      if (!flag) {
-        return
-      }
+
+      if (!flag) { return }
+      // 按钮禁用状态修改为true 即禁用
       this.isLoading = true
+
       try {
-        let res = await login(this.formData)
-        // 在这里操作令牌
+        let { data } = await login(this.formData)
+        // 将参数传进仓库
+        this.changetoken(data.data)
+        this.$router.push('/tabbar')
+        // 已经通过 tokenObj这个变量 接收了token
       } catch (err) {
         if (err.response.status === 400) {
           this.$toast.fail('验证失败')

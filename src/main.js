@@ -11,7 +11,12 @@ import zhCN from 'vee-validate/dist/locale/zh_CN'
 // 这个是所有的验证规则
 import * as rules from 'vee-validate/dist/rules'
 // 按需引入vant 插件
-import { Button, Field, NavBar, Toast } from 'vant'
+// 引入reques
+
+import { Button, Field, NavBar, Toast, Cell,
+  CellGroup, Tabbar, TabbarItem, Tab, Tabs,
+  List
+} from 'vant'
 
 Vue.config.productionTip = false
 // 配置全局的vant插件
@@ -20,6 +25,13 @@ Vue
   .use(Field)
   .use(NavBar)
   .use(Toast)
+  .use(Cell)
+  .use(CellGroup)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Tab)
+  .use(Tabs)
+  .use(List)
 
 // 配置使用中文语言
 for (let rule in rules) {
@@ -45,5 +57,6 @@ Vue.component('ValidationObserver', ValidationObserver)
 new Vue({
   router,
   store,
+
   render: h => h(App)
 }).$mount('#app')
